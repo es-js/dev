@@ -1,0 +1,29 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+            fetch-depth: 0
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.1
+        with:
+          branch: gh-pages
+          folder: src/.vitepress/dist
+          clean: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+          enable_jekyll: true
+          jekyll_config: _config.yml
+          commit_message: Deployed to GitHub Pages
+          commit_user_name: GitHub Actions
+          commit_user_email:
+
